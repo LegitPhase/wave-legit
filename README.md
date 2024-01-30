@@ -1,5 +1,8 @@
 # Wave Anticheat - LegitPhase's Edition
 
+
+# most of this anticheat was NOT MADE BY ME. i mean i wouldnt make something this bad. original owner is @Kod3ra
+
 Yay ! i love wasting time by recoding monkey ahh anticheat code that is somehow better than a paid 8€ antihake called negativity ;(
 Also elikill i dont like you ;(
 
