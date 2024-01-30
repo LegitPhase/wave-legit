@@ -1,18 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.Location
- *  org.bukkit.block.Block
- *  org.bukkit.block.BlockFace
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- *  org.bukkit.potion.PotionEffect
- *  org.bukkit.potion.PotionEffectType
- */
 package be.kod3ra.wave.checks.impl.movement;
 
 import be.kod3ra.wave.Wave;
@@ -28,10 +13,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -39,14 +22,14 @@ import org.bukkit.potion.PotionEffectType;
 public final class SpeedA
         extends Check {
     private final MovementEngine movementEngine = new MovementEngine();
-    private long ignoreTimeStart = 0L;
-    private long lastResetTime = System.currentTimeMillis();
     private final boolean isEnabled;
     private final double maxValue;
     private final long violationsResetTime;
     private final int onJoinDisabledTime;
     private final int maxViolations;
     private final String action;
+    private long ignoreTimeStart = 0L;
+    private long lastResetTime = System.currentTimeMillis();
 
     public SpeedA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -72,7 +55,7 @@ public final class SpeedA
             return;
         }
         long joinTime = userData.getJoinTime(player.getUniqueId());
-        if (System.currentTimeMillis() - joinTime < (long) (this.onJoinDisabledTime * 1000L)) {
+        if (System.currentTimeMillis() - joinTime < (this.onJoinDisabledTime * 1000L)) {
             return;
         }
         if (this.hasIceOrTrapdoorAround(player, 3) || this.isBlockAboveHeadSolid(player)) {

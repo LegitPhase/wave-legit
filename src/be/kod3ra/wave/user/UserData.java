@@ -1,10 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  com.google.common.collect.Maps
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.user;
 
 import com.google.common.collect.Maps;

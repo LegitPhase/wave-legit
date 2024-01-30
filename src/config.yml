@@ -10,7 +10,7 @@
 #         Authors: Main Dev: Kod3ra / Helper: bedike16
 #
 
-  # Configuration for plugin messages
+# Configuration for plugin messages
 wave-command: "§b§lWave §f» §eBETA 0.1.0 is running on the server!"
 
 # Help command messages

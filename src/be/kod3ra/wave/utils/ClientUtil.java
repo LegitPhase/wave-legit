@@ -1,9 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.utils;
 
 import org.bukkit.entity.Player;

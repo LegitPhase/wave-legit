@@ -1,15 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  net.md_5.bungee.api.chat.BaseComponent
- *  net.md_5.bungee.api.chat.ComponentBuilder
- *  net.md_5.bungee.api.chat.HoverEvent
- *  net.md_5.bungee.api.chat.HoverEvent$Action
- *  net.md_5.bungee.api.chat.TextComponent
- *  org.bukkit.Bukkit
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.checks;
 
 import be.kod3ra.wave.Wave;
@@ -39,7 +27,7 @@ public abstract class Check
         }
         CheckInfo checkInfo = this.getClass().getAnnotation(CheckInfo.class);
         this.checkName = checkInfo.name();
-        this.alertFormat = Wave.getInstance().getConfig().getString("alerts.format", "\u00a7b\u00a7lWave \u00a7b// \u00a7e%player% \u00a77failed \u00a7e%check% (%type%) \u00a78[\u00a77VL: %violations%\u00a78] \u00a78[\u00a77RL: %reliability%%\u00a78]");
+        this.alertFormat = Wave.getInstance().getConfig().getString("alerts.format", "\u00a7b\u00a7lWave \u00a7b
     }
 
     public void flag(User user, String type, String information, int violations, String debugInfo) {

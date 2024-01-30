@@ -1,13 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.combat;
 
 import be.kod3ra.wave.Wave;
@@ -21,23 +11,21 @@ import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
 import org.bukkit.GameMode;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CheckInfo(name = "CRITICALS")
 public final class CriticalsA
         extends Check {
-    private long lastFlyingTime;
     private final boolean isEnabled;
     private final int maxViolations;
     private final int timeDifference;
     private final long violationsResetTime;
-    private long lastResetTime = System.currentTimeMillis();
     private final String action;
-    private long lastAttackTime = 0L;
     private final long attackToleranceWindow = 3000L;
+    private long lastFlyingTime;
+    private long lastResetTime = System.currentTimeMillis();
+    private long lastAttackTime = 0L;
 
     public CriticalsA() {
         FileConfiguration config = Wave.getInstance().getConfig();

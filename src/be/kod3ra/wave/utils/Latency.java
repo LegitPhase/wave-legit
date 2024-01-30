@@ -1,18 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.entity.Player
- *  org.bukkit.event.EventHandler
- *  org.bukkit.event.Listener
- *  org.bukkit.event.player.PlayerChangedWorldEvent
- *  org.bukkit.event.player.PlayerInteractEvent
- *  org.bukkit.event.player.PlayerJoinEvent
- *  org.bukkit.event.player.PlayerQuitEvent
- *  org.bukkit.event.player.PlayerRespawnEvent
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.utils;
 
 import be.kod3ra.wave.Wave;
@@ -21,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
-import org.bukkit.plugin.Plugin;
 
 import java.util.*;
 

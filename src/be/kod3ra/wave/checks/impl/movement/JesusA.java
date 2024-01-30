@@ -1,14 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.block.Block
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.movement;
 
 import be.kod3ra.wave.Wave;
@@ -22,21 +11,19 @@ import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CheckInfo(name = "JESUS")
 public final class JesusA
         extends Check {
     private final MovementEngine movementEngine = new MovementEngine();
-    private long lastResetTime = System.currentTimeMillis();
     private final boolean isEnabled;
     private final double maxValue;
     private final long violationsResetTime;
     private final int maxViolations;
     private final String action;
+    private long lastResetTime = System.currentTimeMillis();
 
     public JesusA() {
         FileConfiguration config = Wave.getInstance().getConfig();

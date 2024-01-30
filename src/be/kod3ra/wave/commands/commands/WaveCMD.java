@@ -1,12 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.command.Command
- *  org.bukkit.command.CommandExecutor
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- */
 package be.kod3ra.wave.commands.commands;
 
 import be.kod3ra.wave.Wave;

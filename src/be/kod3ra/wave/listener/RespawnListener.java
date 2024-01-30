@@ -1,11 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.event.EventHandler
- *  org.bukkit.event.Listener
- *  org.bukkit.event.player.PlayerRespawnEvent
- */
 package be.kod3ra.wave.listener;
 
 import be.kod3ra.wave.Wave;

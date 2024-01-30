@@ -1,13 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.Material
- *  org.bukkit.block.Block
- *  org.bukkit.event.EventHandler
- *  org.bukkit.event.Listener
- *  org.bukkit.event.block.BlockBreakEvent
- */
 package be.kod3ra.wave.listener;
 
 import org.bukkit.Material;
@@ -23,7 +13,7 @@ public class MineListener
         Block brokenBlock;
         Material blockType;
         if (event.getPlayer() == null || (blockType = (brokenBlock = event.getBlock()).getType()) == Material.DIAMOND_ORE || blockType == Material.IRON_ORE || blockType == Material.GOLD_ORE || blockType == Material.COAL_ORE || blockType == Material.REDSTONE_ORE || blockType == Material.LAPIS_ORE) {
-            // empty if block
+
         }
     }
 }

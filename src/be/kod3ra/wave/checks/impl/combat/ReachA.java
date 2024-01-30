@@ -1,16 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Entity
- *  org.bukkit.entity.LivingEntity
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- *  org.bukkit.util.Vector
- */
 package be.kod3ra.wave.checks.impl.combat;
 
 import be.kod3ra.wave.Wave;
@@ -24,12 +11,10 @@ import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
 import org.bukkit.GameMode;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
@@ -43,12 +28,12 @@ public class ReachA
     private final ReachEngine reachEngine = new ReachEngine();
     private final Map<UUID, Player> lastAttackedPositions = new HashMap<UUID, Player>();
     private final Map<UUID, Long> lastDetectionTimes = new HashMap<UUID, Long>();
-    private long lastResetTime = System.currentTimeMillis();
     private final boolean isEnabled;
     private final double maxReachDistance;
     private final long violationsResetTime;
     private final int maxViolations;
     private final String action;
+    private long lastResetTime = System.currentTimeMillis();
 
     public ReachA() {
         FileConfiguration config = Wave.getInstance().getConfig();

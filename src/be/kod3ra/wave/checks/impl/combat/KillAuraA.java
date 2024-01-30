@@ -1,13 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.combat;
 
 import be.kod3ra.wave.Wave;
@@ -21,23 +11,21 @@ import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
 import org.bukkit.GameMode;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CheckInfo(name = "KILLAURA")
 public final class KillAuraA
         extends Check {
-    private int usePackets;
-    private int flyPackets;
     private final int ratioThreshold;
-    private long lastCheckTime;
-    private long lastResetTime = System.currentTimeMillis();
     private final boolean isEnabled;
     private final long violationsResetTime;
     private final String action;
     private final int maxViolations;
+    private int usePackets;
+    private int flyPackets;
+    private long lastCheckTime;
+    private long lastResetTime = System.currentTimeMillis();
 
     public KillAuraA() {
         FileConfiguration config = Wave.getInstance().getConfig();

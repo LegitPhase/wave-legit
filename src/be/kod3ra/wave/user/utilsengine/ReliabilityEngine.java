@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- */
 package be.kod3ra.wave.user.utilsengine;
 
 import be.kod3ra.wave.utils.MemoryUtil;

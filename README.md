@@ -10,7 +10,7 @@ fix all shitcode, and all stupid shit
 
 ## Original
 
-https://www.spigotmc.org/resources/⚔%EF%B8%8F-wave・anticheat・1-8x-1-20x-bÊta.114804/
+https:
 
 not obf btw :3
 

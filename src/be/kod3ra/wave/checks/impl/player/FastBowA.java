@@ -1,14 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.inventory.ItemStack
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.player;
 
 import be.kod3ra.wave.Wave;
@@ -21,11 +10,9 @@ import be.kod3ra.wave.user.utilsengine.SetbackEngine;
 import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import org.bukkit.GameMode;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,12 +21,12 @@ import java.util.TimerTask;
 public class FastBowA
         extends Check {
     private final MovementEngine movementEngine;
-    private int packetCount = 0;
     private final int maxPackets;
     private final Timer timer;
     private final long violationsResetTime;
     private final String action;
     private final int maxViolations;
+    private int packetCount = 0;
     private long lastResetTime = System.currentTimeMillis();
 
     public FastBowA() {

@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- */
 package be.kod3ra.wave.user.engine;
 
 import be.kod3ra.wave.packet.WrappedPacket;

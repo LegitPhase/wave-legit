@@ -1,11 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.Material
- *  org.bukkit.block.Block
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.user.engine;
 
 import org.bukkit.Material;

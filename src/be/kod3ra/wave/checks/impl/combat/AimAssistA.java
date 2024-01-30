@@ -1,9 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.checks.impl.combat;
 
 import be.kod3ra.wave.checks.Check;
@@ -24,7 +18,7 @@ public final class AimAssistA
     public void onPacket(User user, WrappedPacket wrappedPacket) {
         Player player = user.getPlayer();
         if (!wrappedPacket.isAttacking() || wrappedPacket.isMovingAndRotation()) {
-            // empty if block
+
         }
     }
 }

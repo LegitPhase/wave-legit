@@ -1,17 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.Location
- *  org.bukkit.World
- *  org.bukkit.block.Block
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- *  org.bukkit.util.Vector
- */
 package be.kod3ra.wave.checks.impl.movement;
 
 import be.kod3ra.wave.Wave;
@@ -29,10 +15,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 @CheckInfo(name = "FLIGHT")
@@ -64,7 +48,7 @@ public final class FlightA
         }
         Player player = user.getPlayer();
         UserData userData = Wave.getInstance().getUserData();
-        if (player != null && System.currentTimeMillis() - userData.getJoinTime(player.getUniqueId()) > (long) (this.onJoinDisabledTime * 1000L)) {
+        if (player != null && System.currentTimeMillis() - userData.getJoinTime(player.getUniqueId()) > (this.onJoinDisabledTime * 1000L)) {
             if (System.currentTimeMillis() - userData.getLastTeleportTime(player.getUniqueId()) < 3000L) {
                 return;
             }

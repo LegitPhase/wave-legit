@@ -1,10 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.configuration.file.YamlConfiguration
- */
 package be.kod3ra.wave;
 
 import org.bukkit.configuration.file.FileConfiguration;

@@ -1,10 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.Bukkit
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.user;
 
 import be.kod3ra.wave.Wave;
@@ -18,9 +11,9 @@ public final class User {
     private final UUID uuid;
     private final Player player;
     private final String name;
+    private final CheckManager checkManager;
     private int packetCount;
     private long lastXRayDetectionTime;
-    private final CheckManager checkManager;
 
     public User(UUID uuid) {
         this.uuid = uuid;

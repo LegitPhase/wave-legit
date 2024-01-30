@@ -1,10 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  com.google.common.collect.ImmutableClassToInstanceMap
- *  com.google.common.collect.ImmutableClassToInstanceMap$Builder
- */
 package be.kod3ra.wave.checks;
 
 import be.kod3ra.wave.Wave;

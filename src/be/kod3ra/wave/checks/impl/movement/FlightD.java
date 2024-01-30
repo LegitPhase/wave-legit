@@ -1,16 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.Location
- *  org.bukkit.Material
- *  org.bukkit.block.Block
- *  org.bukkit.command.CommandSender
- *  org.bukkit.configuration.file.FileConfiguration
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.movement;
 
 import be.kod3ra.wave.Wave;
@@ -25,22 +12,20 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CheckInfo(name = "FLIGHT")
 public final class FlightD
         extends Check {
-    private long lastGroundedTime;
     private final boolean isEnabled;
     private final long violationsResetTime;
-    private long lastResetTime = System.currentTimeMillis();
     private final int maxViolations;
     private final int groundTime;
     private final String action;
     private final long ignoreTime = 2000L;
+    private long lastGroundedTime;
+    private long lastResetTime = System.currentTimeMillis();
     private long lastIgnoreTime;
 
     public FlightD() {

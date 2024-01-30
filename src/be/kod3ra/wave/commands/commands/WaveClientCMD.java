@@ -1,12 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.command.Command
- *  org.bukkit.command.CommandExecutor
- *  org.bukkit.command.CommandSender
- *  org.bukkit.entity.Player
- */
 package be.kod3ra.wave.commands.commands;
 
 import be.kod3ra.wave.Wave;
@@ -21,7 +12,7 @@ public class WaveClientCMD
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String usageMessage = this.getConfigMessage("wave-client.usage", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eUsage: /wave client <player>");
         String playerNotOnlineMessage = this.getConfigMessage("wave-client.player-not-online", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eThe specified player is not online.");
-        String clientBrandMessage = this.getConfigMessage("wave-client.client-brand-message", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7e%player% has joined the server using \u00a7b%client% \u00a7e/// \u00a7b%brand%");
+        String clientBrandMessage = this.getConfigMessage("wave-client.client-brand-message", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7e%player% has joined the server using \u00a7b%client% \u00a7e
         if (args.length != 1) {
             sender.sendMessage(usageMessage);
             return true;

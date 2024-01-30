@@ -1,13 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- *
- * Could not load the following classes:
- *  org.bukkit.GameMode
- *  org.bukkit.Location
- *  org.bukkit.command.CommandSender
- *  org.bukkit.entity.Player
- *  org.bukkit.plugin.Plugin
- */
 package be.kod3ra.wave.checks.impl.movement;
 
 import be.kod3ra.wave.Wave;
@@ -20,20 +10,18 @@ import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CheckInfo(name = "STEP")
 public final class StepA
         extends Check {
-    private Location lastLocation;
     private final boolean isEnabled;
     private final double maxYSpeed;
     private final int maxViolations;
     private final String action;
-    private long lastResetTime = System.currentTimeMillis();
     private final long violationsResetTime;
+    private Location lastLocation;
+    private long lastResetTime = System.currentTimeMillis();
 
     public StepA() {
         this.isEnabled = Wave.getInstance().getConfig().getBoolean("Checks.StepA.ENABLED", true);
