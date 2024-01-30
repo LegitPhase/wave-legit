@@ -27,7 +27,7 @@ public abstract class Check
         }
         CheckInfo checkInfo = this.getClass().getAnnotation(CheckInfo.class);
         this.checkName = checkInfo.name();
-        this.alertFormat = Wave.getInstance().getConfig().getString("alerts.format", "\u00a7b\u00a7lWave \u00a7b
+        this.alertFormat = Wave.getInstance().getConfig().getString("alerts.format", "\u00a7b\u00a7lWave \u00a7b// \u00a7e%player% \u00a77failed \u00a7e%check% (%type%) \u00a78[\u00a77VL: %violations%\u00a78] \u00a78[\u00a77RL: %reliability%%\u00a78]");
     }
 
     public void flag(User user, String type, String information, int violations, String debugInfo) {
@@ -52,4 +52,3 @@ public abstract class Check
         Bukkit.getServer().getConsoleSender().sendMessage(message);
     }
 }
-

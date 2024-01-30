@@ -12,7 +12,7 @@ public class WaveClientCMD
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String usageMessage = this.getConfigMessage("wave-client.usage", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eUsage: /wave client <player>");
         String playerNotOnlineMessage = this.getConfigMessage("wave-client.player-not-online", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eThe specified player is not online.");
-        String clientBrandMessage = this.getConfigMessage("wave-client.client-brand-message", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7e%player% has joined the server using \u00a7b%client% \u00a7e
+        String clientBrandMessage = this.getConfigMessage("wave-client.client-brand-message", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7e%player% has joined the server using \u00a7b%client% \u00a7e/// \u00a7b%brand%");
         if (args.length != 1) {
             sender.sendMessage(usageMessage);
             return true;
@@ -33,4 +33,3 @@ public class WaveClientCMD
         return Wave.getInstance().getConfig().getString(path, defaultValue);
     }
 }
-
