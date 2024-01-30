@@ -1,6 +1,6 @@
 # Wave Anticheat - LegitPhase's Edition
 
-Yay ! i love wasting time by recoding monkey ahh anticheat code that is somehow better than a paid 5€ antihake called negativity ;(
+Yay ! i love wasting time by recoding monkey ahh anticheat code that is somehow better than a paid 8€ antihake called negativity ;(
 Also elikill i dont like you ;(
 
 ## Goals
