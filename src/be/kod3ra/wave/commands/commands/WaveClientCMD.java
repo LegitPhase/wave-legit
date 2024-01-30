@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.command.Command
  *  org.bukkit.command.CommandExecutor
@@ -17,7 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WaveClientCMD
-implements CommandExecutor {
+        implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String usageMessage = this.getConfigMessage("wave-client.usage", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eUsage: /wave client <player>");
         String playerNotOnlineMessage = this.getConfigMessage("wave-client.player-not-online", "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eThe specified player is not online.");

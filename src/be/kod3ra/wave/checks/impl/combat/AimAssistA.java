@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.entity.Player
  */
@@ -10,13 +10,14 @@ import be.kod3ra.wave.checks.Check;
 import be.kod3ra.wave.checks.impl.CheckInfo;
 import be.kod3ra.wave.packet.WrappedPacket;
 import be.kod3ra.wave.user.User;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.entity.Player;
 
-@CheckInfo(name="AIM_ASSIST")
+import java.util.HashMap;
+import java.util.Map;
+
+@CheckInfo(name = "AIM_ASSIST")
 public final class AimAssistA
-extends Check {
+        extends Check {
     private final Map<Player, Long> lastClickTimes = new HashMap<Player, Long>();
 
     @Override

@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.GameMode
@@ -31,19 +31,19 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="TIMER")
+@CheckInfo(name = "TIMER")
 public class TimerA
-extends Check {
-    private MovementEngine movementEngine;
-    private LocationEngine locationEngine = new LocationEngine();
+        extends Check {
+    private final MovementEngine movementEngine;
+    private final LocationEngine locationEngine = new LocationEngine();
     private int packetCount = 0;
-    private int maxPackets;
-    private String action;
-    private int maxViolations;
-    private int onJoinDisabledTime;
-    private long violationsResetTime;
+    private final int maxPackets;
+    private final String action;
+    private final int maxViolations;
+    private final int onJoinDisabledTime;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
+    private final boolean isEnabled;
 
     public TimerA() {
         this.movementEngine = new MovementEngine();
@@ -54,7 +54,7 @@ extends Check {
         this.action = config.getString("Checks.TimerA.ACTION", "kick %player% \u00a7b\u00a7lWave \u00a77\u00bb \u00a7eUnfair Advantage.");
         this.onJoinDisabledTime = config.getInt("Checks.TimerA.ON-JOIN-DISABLED-TIME", 7);
         this.violationsResetTime = config.getLong("violations-reset", 120000L);
-        Bukkit.getScheduler().runTaskTimer((Plugin)Wave.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Wave.getInstance(), () -> {
             this.packetCount = 0;
         }, 0L, 20L);
     }
@@ -77,7 +77,7 @@ extends Check {
                 return;
             }
             long joinTime = userData.getJoinTime(player.getUniqueId());
-            if (System.currentTimeMillis() - joinTime < (long)(this.onJoinDisabledTime * 1000)) {
+            if (System.currentTimeMillis() - joinTime < (long) (this.onJoinDisabledTime * 1000L)) {
                 return;
             }
             ++this.packetCount;
@@ -92,9 +92,8 @@ extends Check {
                 if (this.violations >= this.maxViolations && this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

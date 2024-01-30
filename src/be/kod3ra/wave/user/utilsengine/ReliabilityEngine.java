@@ -15,8 +15,7 @@ public class ReliabilityEngine {
         reliability = Math.max(reliability, 0.0);
         try {
             return Double.parseDouble(String.format("%.1f", reliability));
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return Double.parseDouble(String.format("%.0f", reliability));
         }
     }

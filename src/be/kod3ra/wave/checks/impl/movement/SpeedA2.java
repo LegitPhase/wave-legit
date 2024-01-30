@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -27,18 +27,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="SPEED")
+@CheckInfo(name = "SPEED")
 public final class SpeedA2
-extends Check {
-    private MovementEngine movementEngine = new MovementEngine();
-    private LocationEngine locationEngine = new LocationEngine();
+        extends Check {
+    private final MovementEngine movementEngine = new MovementEngine();
+    private final LocationEngine locationEngine = new LocationEngine();
     private long lastViolationTime = 0L;
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
-    private double maxValue;
-    private long violationsResetTime;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final double maxValue;
+    private final long violationsResetTime;
+    private final int maxViolations;
+    private final String action;
 
     public SpeedA2() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -74,9 +74,8 @@ extends Check {
                     if (this.violations >= this.maxViolations && this.violations >= this.maxViolations) {
                         try {
                             String playerAction = this.action.replace("%player%", user.getName());
-                            Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                        }
-                        catch (Exception e) {
+                            Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

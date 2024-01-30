@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.Location
@@ -24,16 +24,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="STEP")
+@CheckInfo(name = "STEP")
 public final class StepA
-extends Check {
+        extends Check {
     private Location lastLocation;
-    private boolean isEnabled;
-    private double maxYSpeed;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final double maxYSpeed;
+    private final int maxViolations;
+    private final String action;
     private long lastResetTime = System.currentTimeMillis();
-    private long violationsResetTime;
+    private final long violationsResetTime;
 
     public StepA() {
         this.isEnabled = Wave.getInstance().getConfig().getBoolean("Checks.StepA.ENABLED", true);
@@ -66,7 +66,7 @@ extends Check {
                 for (int x = -2; x <= 2; ++x) {
                     for (int y = -2; y <= 2; ++y) {
                         for (int z = -2; z <= 2; ++z) {
-                            Location nearbyLocation = currentLocation.clone().add((double)x, (double)y, (double)z);
+                            Location nearbyLocation = currentLocation.clone().add(x, y, z);
                             String blockName = nearbyLocation.getBlock().getType().name();
                             if (!blockName.contains("STAIRS")) continue;
                             return;
@@ -74,7 +74,7 @@ extends Check {
                     }
                 }
                 ++this.violations;
-                String debugInfo = String.valueOf("DeltaY: " + deltaY);
+                String debugInfo = "DeltaY: " + deltaY;
                 this.flag(user, "A", "Abnormal vertical player movement.", this.violations, debugInfo);
                 if (player != null) {
                     CheckLogger.log(player.getName(), "STEP", "Type: A Debug:" + deltaY);
@@ -82,9 +82,8 @@ extends Check {
                 if (this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

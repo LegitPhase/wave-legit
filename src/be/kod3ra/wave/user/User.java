@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.entity.Player
@@ -9,18 +9,18 @@ package be.kod3ra.wave.user;
 
 import be.kod3ra.wave.Wave;
 import be.kod3ra.wave.checks.CheckManager;
-import be.kod3ra.wave.user.UserData;
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public final class User {
-    private String name;
     private final UUID uuid;
     private final Player player;
+    private final String name;
     private int packetCount;
     private long lastXRayDetectionTime;
-    private CheckManager checkManager;
+    private final CheckManager checkManager;
 
     public User(UUID uuid) {
         this.uuid = uuid;
@@ -30,7 +30,7 @@ public final class User {
     }
 
     public Player getPlayer() {
-        return Bukkit.getPlayer((UUID)this.uuid);
+        return Bukkit.getPlayer(this.uuid);
     }
 
     public String getName() {

@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.Location
@@ -35,17 +35,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-@CheckInfo(name="FLIGHT")
+@CheckInfo(name = "FLIGHT")
 public final class FlightA
-extends Check {
-    private FlightEngine flightEngine = new FlightEngine();
-    private LocationEngine locationEngine = new LocationEngine();
-    private boolean isEnabled;
-    private int onJoinDisabledTime;
-    private long violationsResetTime;
-    private int maxViolations;
-    private String action;
+        extends Check {
     private final int SLIME_IGNORE_RADIUS = 5;
+    private final FlightEngine flightEngine = new FlightEngine();
+    private final LocationEngine locationEngine = new LocationEngine();
+    private final boolean isEnabled;
+    private final int onJoinDisabledTime;
+    private final long violationsResetTime;
+    private final int maxViolations;
+    private final String action;
     private long lastResetTime = System.currentTimeMillis();
 
     public FlightA() {
@@ -64,7 +64,7 @@ extends Check {
         }
         Player player = user.getPlayer();
         UserData userData = Wave.getInstance().getUserData();
-        if (player != null && System.currentTimeMillis() - userData.getJoinTime(player.getUniqueId()) > (long)(this.onJoinDisabledTime * 1000)) {
+        if (player != null && System.currentTimeMillis() - userData.getJoinTime(player.getUniqueId()) > (long) (this.onJoinDisabledTime * 1000L)) {
             if (System.currentTimeMillis() - userData.getLastTeleportTime(player.getUniqueId()) < 3000L) {
                 return;
             }
@@ -98,9 +98,8 @@ extends Check {
                     if (this.violations >= this.maxViolations) {
                         try {
                             String playerAction = this.action.replace("%player%", user.getName());
-                            Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                        }
-                        catch (Exception e) {
+                            Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -126,7 +125,7 @@ extends Check {
         for (int offsetX = -radius; offsetX <= radius; ++offsetX) {
             for (int offsetY = -radius; offsetY <= radius; ++offsetY) {
                 for (int offsetZ = -radius; offsetZ <= radius; ++offsetZ) {
-                    Block block = world.getBlockAt((int)x + offsetX, (int)y + offsetY, (int)z + offsetZ);
+                    Block block = world.getBlockAt((int) x + offsetX, (int) y + offsetY, (int) z + offsetZ);
                     if (!this.isSolidBlock(block)) continue;
                     return true;
                 }

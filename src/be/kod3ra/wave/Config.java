@@ -1,19 +1,19 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.configuration.file.FileConfiguration
  *  org.bukkit.configuration.file.YamlConfiguration
  */
 package be.kod3ra.wave;
 
-import be.kod3ra.wave.Wave;
-import java.io.File;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
+
 public class Config {
-    private static Config instance = new Config();
+    private static final Config instance = new Config();
     private File file;
     private FileConfiguration config;
 
@@ -30,14 +30,13 @@ public class Config {
         if (!this.file.exists()) {
             plugin.saveResource("config.yml", false);
         }
-        this.config = YamlConfiguration.loadConfiguration((File)this.file);
+        this.config = YamlConfiguration.loadConfiguration(this.file);
     }
 
     public void save() {
         try {
             this.config.save(this.file);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

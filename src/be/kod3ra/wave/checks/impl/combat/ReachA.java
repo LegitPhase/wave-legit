@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -23,9 +23,6 @@ import be.kod3ra.wave.user.utilsengine.SetbackEngine;
 import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -35,19 +32,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-@CheckInfo(name="REACH")
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+@CheckInfo(name = "REACH")
 public class ReachA
-extends Check {
-    private ReachEngine reachEngine = new ReachEngine();
-    private Map<UUID, Player> lastAttackedPositions = new HashMap<UUID, Player>();
-    private Map<UUID, Long> lastDetectionTimes = new HashMap<UUID, Long>();
+        extends Check {
     private static final long DETECTION_DELAY = 2000L;
+    private final ReachEngine reachEngine = new ReachEngine();
+    private final Map<UUID, Player> lastAttackedPositions = new HashMap<UUID, Player>();
+    private final Map<UUID, Long> lastDetectionTimes = new HashMap<UUID, Long>();
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
-    private double maxReachDistance;
-    private long violationsResetTime;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final double maxReachDistance;
+    private final long violationsResetTime;
+    private final int maxViolations;
+    private final String action;
 
     public ReachA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -68,7 +69,7 @@ extends Check {
             if (player != null && (player.isOp() || player.getGameMode() == GameMode.CREATIVE || player.hasPermission("wave.bypass.reach"))) {
                 return;
             }
-            if (wrappedPacket.isAttacking() && !(attackaction = (wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent())).getAction()).equals((Object)WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
+            if (wrappedPacket.isAttacking() && !(attackaction = (wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent())).getAction()).equals(WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
                 return;
             }
             if (this.lastDetectionTimes.containsKey(attacker.getUniqueId())) {
@@ -91,9 +92,8 @@ extends Check {
                     if (this.violations >= this.maxViolations) {
                         try {
                             String playerAction = this.action.replace("%player%", user.getName());
-                            Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                        }
-                        catch (Exception e) {
+                            Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -119,12 +119,13 @@ extends Check {
     private Player findPotentialTarget(Player attacker) {
         Vector attackerDirection = attacker.getEyeLocation().getDirection();
         Player[] target = new Player[]{null};
-        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> {
+        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> {
             for (Entity potentialTarget : attacker.getNearbyEntities(10.0, 10.0, 10.0)) {
                 LivingEntity livingEntity;
                 Vector targetDirection;
-                if (potentialTarget.equals(attacker) || !(potentialTarget instanceof LivingEntity) || !((double)attackerDirection.angle(targetDirection = (livingEntity = (LivingEntity)potentialTarget).getEyeLocation().toVector().subtract(attacker.getEyeLocation().toVector())) < 0.3) || !(livingEntity instanceof Player)) continue;
-                target[0] = (Player)livingEntity;
+                if (potentialTarget.equals(attacker) || !(potentialTarget instanceof LivingEntity) || !((double) attackerDirection.angle(targetDirection = (livingEntity = (LivingEntity) potentialTarget).getEyeLocation().toVector().subtract(attacker.getEyeLocation().toVector())) < 0.3) || !(livingEntity instanceof Player))
+                    continue;
+                target[0] = (Player) livingEntity;
                 break;
             }
         });

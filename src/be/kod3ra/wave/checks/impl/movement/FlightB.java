@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -23,17 +23,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="FLIGHT")
+@CheckInfo(name = "FLIGHT")
 public final class FlightB
-extends Check {
+        extends Check {
     private final MovementEngine movementEngine = new MovementEngine();
-    private boolean isEnabled;
-    private double maxVerticalSpeed;
-    private int onJoinDisabledTime;
-    private int maxViolations;
-    private long violationsResetTime;
+    private final boolean isEnabled;
+    private final double maxVerticalSpeed;
+    private final int onJoinDisabledTime;
+    private final int maxViolations;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
-    private String action;
+    private final String action;
 
     public FlightB() {
         this.isEnabled = Wave.getInstance().getConfig().getBoolean("Checks.FlightB.ENABLED", true);
@@ -50,7 +50,7 @@ extends Check {
             Player player = user.getPlayer();
             UserData userData = Wave.getInstance().getUserData();
             long joinTime = userData.getJoinTime(player.getUniqueId());
-            if (System.currentTimeMillis() - joinTime < (long)(this.onJoinDisabledTime * 1000)) {
+            if (System.currentTimeMillis() - joinTime < (long) (this.onJoinDisabledTime * 1000L)) {
                 return;
             }
             if (player != null && (player.isOp() || player.getGameMode() == GameMode.CREATIVE || player.hasPermission("wave.bypass.flight"))) {
@@ -71,9 +71,8 @@ extends Check {
                     if (this.violations >= this.maxViolations) {
                         try {
                             String playerAction = this.action.replace("%player%", user.getName());
-                            Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                        }
-                        catch (Exception e) {
+                            Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

@@ -1,16 +1,16 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.entity.Player
  */
 package be.kod3ra.wave.user;
 
-import be.kod3ra.wave.user.User;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import org.bukkit.entity.Player;
 
 public class UserManager {
     private final Map<UUID, User> userMap = new HashMap<UUID, User>();

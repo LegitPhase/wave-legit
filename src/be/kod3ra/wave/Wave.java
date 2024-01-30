@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.command.CommandExecutor
@@ -11,22 +11,9 @@
  */
 package be.kod3ra.wave;
 
-import be.kod3ra.wave.Config;
 import be.kod3ra.wave.commands.Macro;
-import be.kod3ra.wave.commands.commands.WaveBanCMD;
-import be.kod3ra.wave.commands.commands.WaveCMD;
-import be.kod3ra.wave.commands.commands.WaveClientCMD;
-import be.kod3ra.wave.commands.commands.WaveGuiCMD;
-import be.kod3ra.wave.commands.commands.WaveHelpCMD;
-import be.kod3ra.wave.commands.commands.WaveKickCMD;
-import be.kod3ra.wave.commands.commands.WaveNotifyCMD;
-import be.kod3ra.wave.commands.commands.WaveServerCMD;
-import be.kod3ra.wave.commands.commands.WaveTempBanCMD;
-import be.kod3ra.wave.listener.DamageListener;
-import be.kod3ra.wave.listener.MineListener;
-import be.kod3ra.wave.listener.PlayerConnectionListener;
-import be.kod3ra.wave.listener.RespawnListener;
-import be.kod3ra.wave.listener.TeleportListener;
+import be.kod3ra.wave.commands.commands.*;
+import be.kod3ra.wave.listener.*;
 import be.kod3ra.wave.user.UserData;
 import be.kod3ra.wave.user.UserPacketListener;
 import be.kod3ra.wave.utils.HighPing;
@@ -42,15 +29,19 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Wave
-extends JavaPlugin {
-    private static Wave instance;
-    private final UserData userData = new UserData();
+        extends JavaPlugin {
     public static final String ANSI_RESET = "\u001b[0m";
     public static final String ANSI_YELLOW = "\u001b[33m";
     public static final String ANSI_BOLD = "\u001b[1m";
+    private static Wave instance;
+    private final UserData userData = new UserData();
+
+    public static Wave getInstance() {
+        return instance;
+    }
 
     public void onLoad() {
-        PacketEvents.setAPI(SpigotPacketEventsBuilder.build((Plugin)this));
+        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
         PacketEvents.getAPI().getSettings().checkForUpdates(false).bStats(false);
         PacketEvents.getAPI().load();
     }
@@ -60,25 +51,25 @@ extends JavaPlugin {
         Config.getInstance().load();
         PacketEvents.getAPI().getEventManager().registerListener(new UserPacketListener());
         PacketEvents.getAPI().init();
-        this.getServer().getPluginManager().registerEvents((Listener)new TeleportListener(), (Plugin)this);
-        this.getServer().getPluginManager().registerEvents((Listener)new RespawnListener(), (Plugin)this);
-        this.getServer().getPluginManager().registerEvents((Listener)new DamageListener(), (Plugin)this);
-        this.getServer().getPluginManager().registerEvents((Listener)new MineListener(), (Plugin)this);
-        this.getServer().getPluginManager().registerEvents((Listener)new Macro(), (Plugin)this);
+        this.getServer().getPluginManager().registerEvents(new TeleportListener(), this);
+        this.getServer().getPluginManager().registerEvents(new RespawnListener(), this);
+        this.getServer().getPluginManager().registerEvents(new DamageListener(), this);
+        this.getServer().getPluginManager().registerEvents(new MineListener(), this);
+        this.getServer().getPluginManager().registerEvents(new Macro(), this);
         new Latency();
         HighPing pingChecker = new HighPing();
         pingChecker.startChecking();
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents((Listener)new PlayerConnectionListener(), (Plugin)Wave.getInstance());
-        this.getCommand("wave").setExecutor((CommandExecutor)new WaveCMD());
-        this.getCommand("wavehelp").setExecutor((CommandExecutor)new WaveHelpCMD(Config.getInstance()));
-        this.getCommand("wavegui").setExecutor((CommandExecutor)new WaveGuiCMD((Plugin)this));
-        this.getCommand("waveclient").setExecutor((CommandExecutor)new WaveClientCMD());
-        this.getCommand("wavenotify").setExecutor((CommandExecutor)new WaveNotifyCMD(this));
-        this.getCommand("waveserver").setExecutor((CommandExecutor)new WaveServerCMD(Config.getInstance()));
-        this.getCommand("wavekick").setExecutor((CommandExecutor)new WaveKickCMD(this));
-        this.getCommand("waveban").setExecutor((CommandExecutor)new WaveBanCMD(this));
-        this.getCommand("wavetempban").setExecutor((CommandExecutor)new WaveTempBanCMD(this));
+        pluginManager.registerEvents(new PlayerConnectionListener(), Wave.getInstance());
+        this.getCommand("wave").setExecutor(new WaveCMD());
+        this.getCommand("wavehelp").setExecutor(new WaveHelpCMD(Config.getInstance()));
+        this.getCommand("wavegui").setExecutor(new WaveGuiCMD(this));
+        this.getCommand("waveclient").setExecutor(new WaveClientCMD());
+        this.getCommand("wavenotify").setExecutor(new WaveNotifyCMD(this));
+        this.getCommand("waveserver").setExecutor(new WaveServerCMD(Config.getInstance()));
+        this.getCommand("wavekick").setExecutor(new WaveKickCMD(this));
+        this.getCommand("waveban").setExecutor(new WaveBanCMD(this));
+        this.getCommand("wavetempban").setExecutor(new WaveTempBanCMD(this));
         this.saveDefaultConfig();
         this.getLogger().info("\u001b[33m  __          __\u001b[0m");
         this.getLogger().info("\u001b[33m  \\ \\        / /\u001b[0m");
@@ -98,10 +89,6 @@ extends JavaPlugin {
 
     public void onDisable() {
         PacketEvents.getAPI().terminate();
-    }
-
-    public static Wave getInstance() {
-        return instance;
     }
 
     public UserData getUserData() {

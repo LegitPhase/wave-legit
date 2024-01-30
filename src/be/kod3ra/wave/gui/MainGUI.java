@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.Material
@@ -16,11 +16,6 @@
  */
 package be.kod3ra.wave.gui;
 
-import be.kod3ra.wave.gui.ChecksGUI;
-import be.kod3ra.wave.gui.PlayersGUI;
-import be.kod3ra.wave.gui.SettingsGUI;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -33,14 +28,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainGUI
-implements Listener {
-    private final Plugin plugin;
+        implements Listener {
     private static final Map<Player, MainGUI> playerInstances = new HashMap<Player, MainGUI>();
+    private final Plugin plugin;
 
     public MainGUI(Plugin plugin) {
         this.plugin = plugin;
-        Bukkit.getPluginManager().registerEvents((Listener)this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public static MainGUI getInstance(Player player, Plugin plugin) {
@@ -49,7 +47,7 @@ implements Listener {
 
     public void openGUI(Player player) {
         MainGUI mainGUI = MainGUI.getInstance(player, this.plugin);
-        Inventory gui = Bukkit.createInventory((InventoryHolder)player, (int)27, (String)"\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eMain GUI");
+        Inventory gui = Bukkit.createInventory(player, 27, "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eMain GUI");
         ItemStack cpsSword = new ItemStack(Material.COMPASS);
         ItemMeta cpsSwordMeta = cpsSword.getItemMeta();
         cpsSwordMeta.setDisplayName("\u00a77Players");
@@ -68,15 +66,14 @@ implements Listener {
         for (int i = 0; i < gui.getSize(); ++i) {
             if (gui.getItem(i) != null) continue;
             try {
-                ItemStack glassPane = new ItemStack(Material.valueOf((String)"STAINED_GLASS_PANE"));
+                ItemStack glassPane = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"));
                 ItemMeta glassPaneMeta = glassPane.getItemMeta();
                 glassPaneMeta.setDisplayName(" ");
                 glassPane.setItemMeta(glassPaneMeta);
                 gui.setItem(i, glassPane);
                 continue;
-            }
-            catch (IllegalArgumentException e) {
-                ItemStack glassPane = new ItemStack(Material.valueOf((String)"LEGACY_STAINED_GLASS_PANE"));
+            } catch (IllegalArgumentException e) {
+                ItemStack glassPane = new ItemStack(Material.valueOf("LEGACY_STAINED_GLASS_PANE"));
                 ItemMeta glassPaneMeta = glassPane.getItemMeta();
                 glassPaneMeta.setDisplayName(" ");
                 glassPane.setItemMeta(glassPaneMeta);
@@ -89,7 +86,7 @@ implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() instanceof Player) {
-            Player player = (Player)event.getInventory().getHolder();
+            Player player = (Player) event.getInventory().getHolder();
             if (event.getView().getTitle().equals("\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eMain GUI")) {
                 event.setCancelled(true);
                 ItemStack clickedItem = event.getCurrentItem();

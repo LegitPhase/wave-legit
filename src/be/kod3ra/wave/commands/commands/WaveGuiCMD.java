@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.command.Command
  *  org.bukkit.command.CommandExecutor
@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 public class WaveGuiCMD
-implements CommandExecutor {
+        implements CommandExecutor {
     private final Plugin plugin;
 
     public WaveGuiCMD(Plugin plugin) {
@@ -30,7 +30,7 @@ implements CommandExecutor {
             sender.sendMessage("\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eThis command is only for players!");
             return true;
         }
-        Player player = (Player)sender;
+        Player player = (Player) sender;
         MainGUI mainGUI = new MainGUI(this.plugin);
         mainGUI.openGUI(player);
         return true;

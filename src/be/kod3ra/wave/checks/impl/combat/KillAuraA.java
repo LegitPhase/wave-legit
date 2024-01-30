@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -26,18 +26,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="KILLAURA")
+@CheckInfo(name = "KILLAURA")
 public final class KillAuraA
-extends Check {
+        extends Check {
     private int usePackets;
     private int flyPackets;
-    private int ratioThreshold;
+    private final int ratioThreshold;
     private long lastCheckTime;
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
-    private long violationsResetTime;
-    private String action;
-    private int maxViolations;
+    private final boolean isEnabled;
+    private final long violationsResetTime;
+    private final String action;
+    private final int maxViolations;
 
     public KillAuraA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -69,7 +69,7 @@ extends Check {
         } else if (wrappedPacket.isAttacking()) {
             WrapperPlayClientInteractEntity wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent());
             WrapperPlayClientInteractEntity.InteractAction attackAction = wrapperPlayClientInteractEntity.getAction();
-            if (!attackAction.equals((Object)WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
+            if (!attackAction.equals(WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
                 return;
             }
             ++this.usePackets;
@@ -77,8 +77,8 @@ extends Check {
         long currentTime = System.currentTimeMillis();
         if (currentTime - this.lastCheckTime > 1000L) {
             if (this.flyPackets > 0 && this.usePackets > 0) {
-                double flyUseRatio = (double)this.usePackets / (double)this.flyPackets;
-                if (flyUseRatio > (double)this.ratioThreshold) {
+                double flyUseRatio = (double) this.usePackets / (double) this.flyPackets;
+                if (flyUseRatio > (double) this.ratioThreshold) {
                     ++this.violations;
                     String debugInfo = "FlyPackets: " + this.flyPackets + " UsePackets: " + this.usePackets + " FlyUseRatio: " + flyUseRatio;
                     this.flag(user, "A", "Use packets sent at the same time as flying packets", this.violations, debugInfo);
@@ -89,9 +89,8 @@ extends Check {
                     if (this.violations >= this.maxViolations) {
                         try {
                             String playerAction = this.action.replace("%player%", user.getName());
-                            Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                        }
-                        catch (Exception e) {
+                            Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

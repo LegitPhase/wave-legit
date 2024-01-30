@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -21,27 +21,28 @@ import be.kod3ra.wave.user.utilsengine.SetbackEngine;
 import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="AUTOCLICKER")
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+@CheckInfo(name = "AUTOCLICKER")
 public final class AutoClickerA
-extends Check {
-    private CPSEngine cpsEngine;
-    private boolean isEnabled;
-    private long violationsResetTime;
-    private int maxCps;
-    private int maxViolations;
-    private String action;
+        extends Check {
     private final Map<UUID, Long> ignoredPlayers = new HashMap<UUID, Long>();
-    private long lastResetTime = System.currentTimeMillis();
     private final long ignoreDuration = 4000L;
+    private final CPSEngine cpsEngine;
+    private final boolean isEnabled;
+    private final long violationsResetTime;
+    private final int maxCps;
+    private final int maxViolations;
+    private final String action;
+    private long lastResetTime = System.currentTimeMillis();
 
     public AutoClickerA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -71,7 +72,7 @@ extends Check {
                 this.ignorePlayer(userUUID);
                 return;
             }
-            if (wrappedPacket.isAttacking() && !(attackaction = (wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent())).getAction()).equals((Object)WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
+            if (wrappedPacket.isAttacking() && !(attackaction = (wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent())).getAction()).equals(WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
                 return;
             }
             long clickTime = System.currentTimeMillis();
@@ -84,9 +85,8 @@ extends Check {
                 if (this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

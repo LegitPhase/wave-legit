@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.Location
@@ -30,17 +30,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="FLIGHT")
+@CheckInfo(name = "FLIGHT")
 public final class FlightD
-extends Check {
+        extends Check {
     private long lastGroundedTime;
-    private boolean isEnabled;
-    private long violationsResetTime;
+    private final boolean isEnabled;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
-    private int maxViolations;
-    private int groundTime;
-    private String action;
-    private long ignoreTime = 2000L;
+    private final int maxViolations;
+    private final int groundTime;
+    private final String action;
+    private final long ignoreTime = 2000L;
     private long lastIgnoreTime;
 
     public FlightD() {
@@ -74,9 +74,9 @@ extends Check {
             }
             if (GroundEngine.isServerOnGround(player)) {
                 this.lastGroundedTime = System.currentTimeMillis();
-            } else if (System.currentTimeMillis() - this.lastGroundedTime > (long)this.groundTime && System.currentTimeMillis() - this.lastIgnoreTime > this.ignoreTime) {
+            } else if (System.currentTimeMillis() - this.lastGroundedTime > (long) this.groundTime && System.currentTimeMillis() - this.lastIgnoreTime > this.ignoreTime) {
                 ++this.violations;
-                String debugInfo = String.valueOf("Last ground time: " + this.lastGroundedTime);
+                String debugInfo = "Last ground time: " + this.lastGroundedTime;
                 this.flag(user, "D", "Is not on the ground for more than 2.75 seconds.", this.violations, debugInfo);
                 if (player != null) {
                     CheckLogger.log(player.getName(), "FLIGHT", "Type: D Debug:" + debugInfo);
@@ -84,9 +84,8 @@ extends Check {
                 if (this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

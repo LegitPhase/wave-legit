@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -26,18 +26,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="CRITICALS")
+@CheckInfo(name = "CRITICALS")
 public final class CriticalsA
-extends Check {
+        extends Check {
     private long lastFlyingTime;
-    private boolean isEnabled;
-    private int maxViolations;
-    private int timeDifference;
-    private long violationsResetTime;
+    private final boolean isEnabled;
+    private final int maxViolations;
+    private final int timeDifference;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
-    private String action;
+    private final String action;
     private long lastAttackTime = 0L;
-    private long attackToleranceWindow = 3000L;
+    private final long attackToleranceWindow = 3000L;
 
     public CriticalsA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -65,21 +65,21 @@ extends Check {
         if (wrappedPacket.isAttacking()) {
             WrapperPlayClientInteractEntity wrapperPlayClientInteractEntity = new WrapperPlayClientInteractEntity(wrappedPacket.getPacketReceiveEvent());
             WrapperPlayClientInteractEntity.InteractAction attackaction = wrapperPlayClientInteractEntity.getAction();
-            if (attackaction.equals((Object)WrapperPlayClientInteractEntity.InteractAction.INTERACT) || attackaction.equals((Object)WrapperPlayClientInteractEntity.InteractAction.INTERACT_AT)) {
+            if (attackaction.equals(WrapperPlayClientInteractEntity.InteractAction.INTERACT) || attackaction.equals(WrapperPlayClientInteractEntity.InteractAction.INTERACT_AT)) {
                 if (System.currentTimeMillis() - this.lastAttackTime < this.attackToleranceWindow) {
                     return;
                 }
-                if (!attackaction.equals((Object)WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
+                if (!attackaction.equals(WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
                     return;
                 }
             }
-            if (attackaction.equals((Object)WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
+            if (attackaction.equals(WrapperPlayClientInteractEntity.InteractAction.ATTACK)) {
                 this.lastAttackTime = System.currentTimeMillis();
             }
         }
         if (wrappedPacket.isFlying()) {
             this.lastFlyingTime = System.currentTimeMillis();
-        } else if (wrappedPacket.isAttacking() && (timeDifference = System.currentTimeMillis() - this.lastFlyingTime) < (long)this.timeDifference) {
+        } else if (wrappedPacket.isAttacking() && (timeDifference = System.currentTimeMillis() - this.lastFlyingTime) < (long) this.timeDifference) {
             ++this.violations;
             String debugInfo = String.valueOf(timeDifference);
             this.flag(user, "A", "Very fast flying packets when attacking", this.violations, debugInfo);
@@ -90,9 +90,8 @@ extends Check {
             if (this.violations >= this.maxViolations) {
                 try {
                     String playerAction = this.action.replace("%player%", user.getName());
-                    Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                }
-                catch (Exception e) {
+                    Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

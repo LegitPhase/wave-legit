@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.Material
@@ -17,7 +17,6 @@
  */
 package be.kod3ra.wave.gui;
 
-import be.kod3ra.wave.gui.MainGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -32,23 +31,23 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 public class SettingsGUI
-implements Listener {
+        implements Listener {
     private final Plugin plugin;
     private final FileConfiguration config;
 
     public SettingsGUI(Plugin plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
-        Bukkit.getPluginManager().registerEvents((Listener)this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public void openGUI(Player player) {
-        Inventory gui = Bukkit.createInventory((InventoryHolder)player, (int)27, (String)"\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eSettings GUI");
+        Inventory gui = Bukkit.createInventory(player, 27, "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eSettings GUI");
         for (int i = 0; i < gui.getSize(); ++i) {
             int row = i / 9;
             int col = i % 9;
             if (col != 0 && col != 8 && row != 0 && row != 2) continue;
-            ItemStack glassPane = new ItemStack(Material.valueOf((String)"STAINED_GLASS_PANE"));
+            ItemStack glassPane = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"));
             ItemMeta glassPaneMeta = glassPane.getItemMeta();
             glassPaneMeta.setDisplayName(" ");
             glassPane.setItemMeta(glassPaneMeta);
@@ -72,7 +71,7 @@ implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() instanceof Player) {
-            Player player = (Player)event.getInventory().getHolder();
+            Player player = (Player) event.getInventory().getHolder();
             if (event.getView().getTitle().equals("\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eSettings GUI")) {
                 ItemMeta meta;
                 ItemStack clickedItem;
@@ -83,7 +82,7 @@ implements Listener {
                         mainGUI.openGUI(player);
                     } else if (event.getRawSlot() == 10) {
                         boolean currentStatus = this.config.getBoolean("setback");
-                        this.config.set("setback", (Object)(!currentStatus ? 1 : 0));
+                        this.config.set("setback", !currentStatus ? 1 : 0);
                         this.plugin.saveConfig();
                         this.openGUI(player);
                     }

@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.command.Command
  *  org.bukkit.command.CommandExecutor
@@ -14,7 +14,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class WaveHelpCMD
-implements CommandExecutor {
+        implements CommandExecutor {
     private final Config config;
 
     public WaveHelpCMD(Config config) {

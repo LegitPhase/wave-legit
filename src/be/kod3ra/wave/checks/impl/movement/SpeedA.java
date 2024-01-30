@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.Location
@@ -35,18 +35,18 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-@CheckInfo(name="SPEED")
+@CheckInfo(name = "SPEED")
 public final class SpeedA
-extends Check {
+        extends Check {
     private final MovementEngine movementEngine = new MovementEngine();
     private long ignoreTimeStart = 0L;
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
-    private double maxValue;
-    private long violationsResetTime;
-    private int onJoinDisabledTime;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final double maxValue;
+    private final long violationsResetTime;
+    private final int onJoinDisabledTime;
+    private final int maxViolations;
+    private final String action;
 
     public SpeedA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -72,7 +72,7 @@ extends Check {
             return;
         }
         long joinTime = userData.getJoinTime(player.getUniqueId());
-        if (System.currentTimeMillis() - joinTime < (long)(this.onJoinDisabledTime * 1000)) {
+        if (System.currentTimeMillis() - joinTime < (long) (this.onJoinDisabledTime * 1000L)) {
             return;
         }
         if (this.hasIceOrTrapdoorAround(player, 3) || this.isBlockAboveHeadSolid(player)) {
@@ -118,7 +118,8 @@ extends Check {
                 for (int z = playerZ - radius; z <= playerZ + radius; ++z) {
                     Block block = player.getWorld().getBlockAt(x, y, z);
                     String blockTypeName = block.getType().name();
-                    if (!blockTypeName.contains("TRAPDOOR") && !blockTypeName.contains("TRAP_DOOR") && !blockTypeName.contains("ICE")) continue;
+                    if (!blockTypeName.contains("TRAPDOOR") && !blockTypeName.contains("TRAP_DOOR") && !blockTypeName.contains("ICE"))
+                        continue;
                     return true;
                 }
             }
@@ -128,7 +129,7 @@ extends Check {
 
     private boolean hasSpeedEffect(Player player) {
         for (PotionEffect effect : player.getActivePotionEffects()) {
-            if (!effect.getType().equals((Object)PotionEffectType.SPEED)) continue;
+            if (!effect.getType().equals(PotionEffectType.SPEED)) continue;
             int amplifier = effect.getAmplifier();
             if (amplifier == 1 || amplifier == 2) {
                 return true;
@@ -149,9 +150,8 @@ extends Check {
         if (this.violations >= this.maxViolations) {
             try {
                 String playerAction = this.action.replace("%player%", user.getName());
-                Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-            }
-            catch (Exception e) {
+                Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

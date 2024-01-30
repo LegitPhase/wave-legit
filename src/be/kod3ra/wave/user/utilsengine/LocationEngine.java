@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Location
  *  org.bukkit.entity.Player
@@ -39,7 +39,7 @@ public class LocationEngine {
 
     private Location getGroundLocation(Player player) {
         Location loc = player.getLocation();
-        loc.setY((double)(player.getWorld().getHighestBlockYAt(loc) - 1));
+        loc.setY(player.getWorld().getHighestBlockYAt(loc) - 1);
         return loc;
     }
 }

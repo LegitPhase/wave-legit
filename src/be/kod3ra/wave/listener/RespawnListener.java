@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.event.EventHandler
  *  org.bukkit.event.Listener
@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class RespawnListener
-implements Listener {
+        implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         UserData userData = Wave.getInstance().getUserData();

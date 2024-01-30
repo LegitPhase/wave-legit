@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.entity.Player
@@ -16,37 +16,28 @@
 package be.kod3ra.wave.utils;
 
 import be.kod3ra.wave.Wave;
-import be.kod3ra.wave.utils.TimeUtil;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.Plugin;
 
+import java.util.*;
+
 public class Latency
-implements Listener {
+        implements Listener {
     private static Map<UUID, Map.Entry<Integer, Long>> packetTicks;
     private static Map<UUID, Long> lastPacket;
     private static Map<UUID, Integer> packets;
-    private List<UUID> blacklist;
+    private final List<UUID> blacklist;
 
     public Latency() {
         packetTicks = new HashMap<UUID, Map.Entry<Integer, Long>>();
         lastPacket = new HashMap<UUID, Long>();
         this.blacklist = new ArrayList<UUID>();
         packets = new HashMap<UUID, Integer>();
-        Wave.getInstance().getServer().getPluginManager().registerEvents((Listener)this, (Plugin)Wave.getInstance());
+        Wave.getInstance().getServer().getPluginManager().registerEvents(this, Wave.getInstance());
     }
 
     public static Integer getLag(Player p) {
@@ -84,7 +75,7 @@ implements Listener {
         if (!Wave.getInstance().isEnabled()) {
             return;
         }
-        if (player.getGameMode().equals((Object)GameMode.CREATIVE)) {
+        if (player.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
         int count = 0;

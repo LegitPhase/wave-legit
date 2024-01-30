@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -25,14 +25,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="BADPACKETS")
+@CheckInfo(name = "BADPACKETS")
 public final class BadPacketsB
-extends Check {
-    private boolean isEnabled;
-    private int maxPitch;
-    private int maxViolations;
-    private String action;
-    private long violationsResetTime;
+        extends Check {
+    private final boolean isEnabled;
+    private final int maxPitch;
+    private final int maxViolations;
+    private final String action;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
 
     public BadPacketsB() {
@@ -56,10 +56,10 @@ extends Check {
             if (player != null && (player.isOp() || player.getGameMode() == GameMode.CREATIVE || player.hasPermission("wave.bypass.badpackets"))) {
                 return;
             }
-            if (playerPitch > (float)this.maxPitch) {
+            if (playerPitch > (float) this.maxPitch) {
                 ++this.violations;
                 SetbackEngine.performSetback(user.getPlayer());
-                String debugInfo = String.valueOf("Pitch: " + playerPitch);
+                String debugInfo = "Pitch: " + playerPitch;
                 this.flag(user, "B", "Invalid Pitch", this.violations, debugInfo);
                 if (player != null) {
                     CheckLogger.log(player.getName(), "BADPACKETS", "Type: B Debug:" + debugInfo);
@@ -67,9 +67,8 @@ extends Check {
                 if (this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

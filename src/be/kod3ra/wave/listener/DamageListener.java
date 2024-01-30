@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.entity.Player
@@ -19,11 +19,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public class DamageListener
-implements Listener {
+        implements Listener {
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
-            Player player = (Player)event.getEntity();
+            Player player = (Player) event.getEntity();
             UserData userData = Wave.getInstance().getUserData();
             if (!player.isOp() && player.getGameMode() != GameMode.CREATIVE && !player.hasPermission("wave.bypass")) {
                 userData.setLastDamageTime(player.getUniqueId(), System.currentTimeMillis());

@@ -16,6 +16,22 @@ public class CheckLogger {
     private static final Logger logger = Logger.getLogger("CheckLogger");
     private static FileHandler fileHandler;
 
+    static {
+        try {
+            File logsFolder = new File("plugins/Wave/logs");
+            if (!logsFolder.exists()) {
+                logsFolder.mkdirs();
+            }
+            String logFileName = CheckLogger.generateLogFileName();
+            fileHandler = new FileHandler("plugins/Wave/logs/" + logFileName, true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void log(String playerName, String checkName, String details) {
         logger.log(Level.WARNING, String.format("[%s] Check '%s' triggered for player '%s' - %s", CheckLogger.getCurrentTimestamp(), checkName, playerName, details));
     }
@@ -28,23 +44,6 @@ public class CheckLogger {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HH'h'-mm'm'");
         Date currentDate = new Date();
         return dateFormat.format(currentDate);
-    }
-
-    static {
-        try {
-            File logsFolder = new File("plugins/Wave/logs");
-            if (!logsFolder.exists()) {
-                logsFolder.mkdirs();
-            }
-            String logFileName = CheckLogger.generateLogFileName();
-            fileHandler = new FileHandler("plugins/Wave/logs/" + logFileName, true);
-            SimpleFormatter formatter = new SimpleFormatter();
-            fileHandler.setFormatter(formatter);
-            logger.addHandler(fileHandler);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
 

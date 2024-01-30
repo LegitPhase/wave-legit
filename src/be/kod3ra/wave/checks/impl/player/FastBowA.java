@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -20,8 +20,6 @@ import be.kod3ra.wave.user.engine.MovementEngine;
 import be.kod3ra.wave.user.utilsengine.SetbackEngine;
 import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
-import java.util.Timer;
-import java.util.TimerTask;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,16 +27,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="FASTBOW")
+import java.util.Timer;
+import java.util.TimerTask;
+
+@CheckInfo(name = "FASTBOW")
 public class FastBowA
-extends Check {
-    private MovementEngine movementEngine;
+        extends Check {
+    private final MovementEngine movementEngine;
     private int packetCount = 0;
-    private int maxPackets;
-    private Timer timer;
-    private long violationsResetTime;
-    private String action;
-    private int maxViolations;
+    private final int maxPackets;
+    private final Timer timer;
+    private final long violationsResetTime;
+    private final String action;
+    private final int maxViolations;
     private long lastResetTime = System.currentTimeMillis();
 
     public FastBowA() {
@@ -49,7 +50,7 @@ extends Check {
         this.action = config.getString("Checks.FastBowA.ACTION", "kick %player% \u00a7b\u00a7lWave \u00a77\u00bb \u00a7eUnfair Advantage.");
         this.violationsResetTime = config.getLong("violations-reset", 120000L);
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new TimerTask(){
+        this.timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
@@ -64,8 +65,7 @@ extends Check {
         Player player = user.getPlayer();
         try {
             item = player.getInventory().getItemInHand();
-        }
-        catch (NoSuchMethodError e) {
+        } catch (NoSuchMethodError e) {
             item = player.getItemInHand();
         }
         if (item != null && !item.getType().toString().contains("BOW")) {
@@ -90,9 +90,8 @@ extends Check {
                 if (this.violations >= this.maxViolations && this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.entity.Player
@@ -14,11 +14,6 @@
 package be.kod3ra.wave.user.engine;
 
 import be.kod3ra.wave.Wave;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,19 +23,21 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.*;
+
 public class CPSEngine
-implements Listener {
-    private Map<UUID, Long> clickStartTimes = new HashMap<UUID, Long>();
-    private Map<UUID, Integer> clickCounters = new HashMap<UUID, Integer>();
+        implements Listener {
+    private final Map<UUID, Long> clickStartTimes = new HashMap<UUID, Long>();
+    private final Map<UUID, Integer> clickCounters = new HashMap<UUID, Integer>();
 
     public CPSEngine(Wave plugin) {
-        new BukkitRunnable(){
+        new BukkitRunnable() {
 
             public void run() {
                 CPSEngine.this.resetClickCounters();
             }
-        }.runTaskTimer((Plugin)plugin, 20L, 20L);
-        Bukkit.getPluginManager().registerEvents((Listener)this, (Plugin)plugin);
+        }.runTaskTimer(plugin, 20L, 20L);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public void startClick(UUID playerId) {

@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.command.Command
@@ -12,7 +12,6 @@
 package be.kod3ra.wave.commands.commands;
 
 import be.kod3ra.wave.utils.ColorUtil;
-import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,8 +19,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
+
 public class WaveNotifyCMD
-implements CommandExecutor {
+        implements CommandExecutor {
     private final JavaPlugin plugin;
 
     public WaveNotifyCMD(JavaPlugin plugin) {
@@ -34,7 +35,7 @@ implements CommandExecutor {
             return true;
         }
         String target = args[0].toLowerCase();
-        String message = ColorUtil.format(String.join((CharSequence)" ", Arrays.copyOfRange(args, 1, args.length)));
+        String message = ColorUtil.format(String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
         String prefix = ColorUtil.format(this.plugin.getConfig().getString("wave-notify.prefix"));
         if (target.equals("everyone")) {
             this.broadcastMessage(prefix + message);
@@ -47,7 +48,7 @@ implements CommandExecutor {
     }
 
     private void broadcastMessage(String message) {
-        Bukkit.broadcastMessage((String)message);
+        Bukkit.broadcastMessage(message);
     }
 
     private void sendToStaff(String message) {

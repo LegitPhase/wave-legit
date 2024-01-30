@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.Location
@@ -31,13 +31,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="NOFALL")
+@CheckInfo(name = "NOFALL")
 public final class NoFallA
-extends Check {
-    private boolean enabled;
-    private int maxViolations;
-    private String kickAction;
-    private long violationsResetTime;
+        extends Check {
+    private final boolean enabled;
+    private final int maxViolations;
+    private final String kickAction;
+    private final long violationsResetTime;
     private long lastResetTime = System.currentTimeMillis();
 
     public NoFallA() {
@@ -68,7 +68,7 @@ extends Check {
         boolean isServerOnGround = GroundEngine.isServerOnGround(user.getPlayer());
         if (isClientOnGround && !isServerOnGround) {
             ++this.violations;
-            String debugInfo = String.valueOf("Client Ground: " + isClientOnGround + " | Server Ground: " + isServerOnGround);
+            String debugInfo = "Client Ground: " + isClientOnGround + " | Server Ground: " + isServerOnGround;
             this.flag(user, "A", "Client on ground, but not on server", this.violations, debugInfo);
             if (player != null) {
                 CheckLogger.log(player.getName(), "NOFALL", "Type: A Debug:" + debugInfo);
@@ -76,9 +76,8 @@ extends Check {
             if (this.violations >= this.maxViolations) {
                 try {
                     String playerAction = this.kickAction.replace("%player%", user.getName());
-                    Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                }
-                catch (Exception e) {
+                    Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

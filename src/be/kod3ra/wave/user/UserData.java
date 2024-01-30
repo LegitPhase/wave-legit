@@ -1,18 +1,18 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  com.google.common.collect.Maps
  *  org.bukkit.entity.Player
  */
 package be.kod3ra.wave.user;
 
-import be.kod3ra.wave.user.User;
 import com.google.common.collect.Maps;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import org.bukkit.entity.Player;
 
 public final class UserData {
     private final Map<UUID, User> userMap = Maps.newHashMap();
@@ -22,7 +22,7 @@ public final class UserData {
     private final Map<UUID, Long> lastDamageTimeMap = new HashMap<UUID, Long>();
     private final Map<UUID, Long> lastDamageIgnoredTimeMap = new HashMap<UUID, Long>();
     private final Map<UUID, Long> lastAttackTimeMap = new HashMap<UUID, Long>();
-    private Map<UUID, Long> lastSneakIgnoreTimes = new HashMap<UUID, Long>();
+    private final Map<UUID, Long> lastSneakIgnoreTimes = new HashMap<UUID, Long>();
 
     public void createUserData(Player player) {
         if (!this.userMap.containsKey(player.getUniqueId())) {

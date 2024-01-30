@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Material
  *  org.bukkit.block.Block
@@ -15,19 +15,20 @@ import be.kod3ra.wave.checks.impl.CheckInfo;
 import be.kod3ra.wave.packet.WrappedPacket;
 import be.kod3ra.wave.user.User;
 import be.kod3ra.wave.user.UserManager;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 
-@CheckInfo(name="XRAY")
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.UUID;
+
+@CheckInfo(name = "XRAY")
 public final class XRayA
-extends Check {
+        extends Check {
     private final UserManager userManager;
     private final Map<UUID, Integer> diamondCounter = new HashMap<UUID, Integer>();
     private final int diamondThreshold = 9;

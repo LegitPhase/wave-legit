@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.block.Block
@@ -27,16 +27,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="JESUS")
+@CheckInfo(name = "JESUS")
 public final class JesusA
-extends Check {
-    private MovementEngine movementEngine = new MovementEngine();
+        extends Check {
+    private final MovementEngine movementEngine = new MovementEngine();
     private long lastResetTime = System.currentTimeMillis();
-    private boolean isEnabled;
-    private double maxValue;
-    private long violationsResetTime;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final double maxValue;
+    private final long violationsResetTime;
+    private final int maxViolations;
+    private final String action;
 
     public JesusA() {
         FileConfiguration config = Wave.getInstance().getConfig();
@@ -67,9 +67,10 @@ extends Check {
             for (int x = -4; x <= 4 && !ignoreCheck; ++x) {
                 for (int y = -4; y <= 4 && !ignoreCheck; ++y) {
                     for (int z = -4; z <= 4 && !ignoreCheck; ++z) {
-                        Block block = player.getLocation().add((double)x, (double)y, (double)z).getBlock();
+                        Block block = player.getLocation().add(x, y, z).getBlock();
                         String blockTypeName = block.getType().name();
-                        if (!block.getType().isSolid() && !blockTypeName.contains("WATER_LILY") && !blockTypeName.contains("LILY_PAD")) continue;
+                        if (!block.getType().isSolid() && !blockTypeName.contains("WATER_LILY") && !blockTypeName.contains("LILY_PAD"))
+                            continue;
                         ignoreCheck = true;
                     }
                 }
@@ -95,9 +96,8 @@ extends Check {
         if (this.violations >= this.maxViolations) {
             try {
                 String playerAction = this.action.replace("%player%", user.getName());
-                Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-            }
-            catch (Exception e) {
+                Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

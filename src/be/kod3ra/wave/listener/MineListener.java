@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Material
  *  org.bukkit.block.Block
@@ -17,7 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class MineListener
-implements Listener {
+        implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Block brokenBlock;

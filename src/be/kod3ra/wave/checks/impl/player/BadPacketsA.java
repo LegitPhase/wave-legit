@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.GameMode
  *  org.bukkit.command.CommandSender
@@ -19,23 +19,24 @@ import be.kod3ra.wave.user.UserData;
 import be.kod3ra.wave.user.utilsengine.SetbackEngine;
 import be.kod3ra.wave.utils.CheckLogger;
 import be.kod3ra.wave.utils.Latency;
-import java.util.LinkedList;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-@CheckInfo(name="BADPACKETS")
+import java.util.LinkedList;
+
+@CheckInfo(name = "BADPACKETS")
 public final class BadPacketsA
-extends Check {
+        extends Check {
     private static final int MAX_HISTORY_SIZE = 20000;
     private final LinkedList<Long> packetTimes = new LinkedList();
-    private boolean isEnabled;
-    private int maxPacketsPerSecond;
-    private long violationsResetTime;
-    private int maxViolations;
-    private String action;
+    private final boolean isEnabled;
+    private final int maxPacketsPerSecond;
+    private final long violationsResetTime;
+    private final int maxViolations;
+    private final String action;
     private long lastResetTime = System.currentTimeMillis();
 
     public BadPacketsA() {
@@ -74,9 +75,8 @@ extends Check {
                 if (this.violations >= this.maxViolations && this.violations >= this.maxViolations) {
                     try {
                         String playerAction = this.action.replace("%player%", user.getName());
-                        Wave.getInstance().getServer().getScheduler().runTask((Plugin)Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand((CommandSender)Wave.getInstance().getServer().getConsoleSender(), playerAction));
-                    }
-                    catch (Exception e) {
+                        Wave.getInstance().getServer().getScheduler().runTask(Wave.getInstance(), () -> Wave.getInstance().getServer().dispatchCommand(Wave.getInstance().getServer().getConsoleSender(), playerAction));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

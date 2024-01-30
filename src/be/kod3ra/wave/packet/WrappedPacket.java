@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.entity.Player
  */
@@ -14,19 +14,15 @@ import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPl
 import org.bukkit.entity.Player;
 
 public final class WrappedPacket {
-    private PacketSendEvent packetSendEvent;
-    private PacketReceiveEvent packetReceiveEvent;
     private final PacketTypeCommon packetTypeCommon;
     private final int packetId;
     private final long timeStamp;
+    private PacketSendEvent packetSendEvent;
+    private PacketReceiveEvent packetReceiveEvent;
     private Player attacker;
     private Player attackedPlayer;
     private float yaw;
     private float pitch;
-
-    public PacketReceiveEvent getPacketReceiveEvent() {
-        return this.packetReceiveEvent;
-    }
 
     public WrappedPacket(PacketReceiveEvent packetReceiveEvent, PacketTypeCommon packetTypeCommon, int packetId, long timeStamp) {
         this.packetReceiveEvent = packetReceiveEvent;
@@ -40,6 +36,10 @@ public final class WrappedPacket {
         this.packetTypeCommon = packetTypeCommon;
         this.packetId = packetId;
         this.timeStamp = timeStamp;
+    }
+
+    public PacketReceiveEvent getPacketReceiveEvent() {
+        return this.packetReceiveEvent;
     }
 
     public boolean isFlying() {

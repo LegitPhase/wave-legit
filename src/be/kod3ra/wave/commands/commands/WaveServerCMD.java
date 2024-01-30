@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.command.Command
  *  org.bukkit.command.CommandExecutor
@@ -19,7 +19,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WaveServerCMD
-implements CommandExecutor {
+        implements CommandExecutor {
     private final Config config;
 
     public WaveServerCMD(Config config) {

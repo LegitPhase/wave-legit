@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  org.bukkit.Bukkit
  *  org.bukkit.Material
@@ -17,11 +17,6 @@
  */
 package be.kod3ra.wave.gui;
 
-import be.kod3ra.wave.gui.MainGUI;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -35,16 +30,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ChecksGUI
-implements Listener {
+        implements Listener {
+    private static final Map<Player, ChecksGUI> playerInstances = new HashMap<Player, ChecksGUI>();
     private final Plugin plugin;
     private final FileConfiguration config;
-    private static final Map<Player, ChecksGUI> playerInstances = new HashMap<Player, ChecksGUI>();
 
     public ChecksGUI(Plugin plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
-        Bukkit.getPluginManager().registerEvents((Listener)this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public static ChecksGUI getInstance(Player player, Plugin plugin) {
@@ -53,16 +53,15 @@ implements Listener {
 
     public void openGUI(Player player) {
         ChecksGUI checksGUI = ChecksGUI.getInstance(player, this.plugin);
-        Inventory gui = Bukkit.createInventory((InventoryHolder)player, (int)54, (String)"\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eChecks GUI");
+        Inventory gui = Bukkit.createInventory(player, 54, "\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eChecks GUI");
         for (int i = 0; i < gui.getSize(); ++i) {
             ItemStack glassPane;
             int row = i / 9;
             int col = i % 9;
             if (col >= 1 && col <= 7 && row >= 1 && row <= 4) continue;
             try {
-                glassPane = new ItemStack(Material.valueOf((String)"STAINED_GLASS_PANE"));
-            }
-            catch (IllegalArgumentException e) {
+                glassPane = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"));
+            } catch (IllegalArgumentException e) {
                 glassPane = new ItemStack(Material.STAINED_GLASS_PANE);
             }
             ItemMeta glassPaneMeta = glassPane.getItemMeta();
@@ -132,7 +131,7 @@ implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() instanceof Player) {
-            Player player = (Player)event.getInventory().getHolder();
+            Player player = (Player) event.getInventory().getHolder();
             if (event.getView().getTitle().equals("\u00a7b\u00a7lWave \u00a7f\u00bb \u00a7eChecks GUI")) {
                 event.setCancelled(true);
                 List<Integer> targetSlots = Arrays.asList(10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 49);
@@ -142,7 +141,7 @@ implements Listener {
                     String check = event.getCurrentItem().getItemMeta().getDisplayName().substring(2);
                     if (event.getClick().isLeftClick() || event.getClick().isRightClick()) {
                         boolean currentStatus = this.config.getBoolean("Checks." + check + ".ENABLED");
-                        this.config.set("Checks." + check + ".ENABLED", (Object)(!currentStatus ? 1 : 0));
+                        this.config.set("Checks." + check + ".ENABLED", !currentStatus ? 1 : 0);
                         this.plugin.saveConfig();
                         this.openGUI(player);
                     }

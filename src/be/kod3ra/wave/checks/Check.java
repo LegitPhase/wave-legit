@@ -1,6 +1,6 @@
 /*
  * Decompiled with CFR 0.152.
- * 
+ *
  * Could not load the following classes:
  *  net.md_5.bungee.api.chat.BaseComponent
  *  net.md_5.bungee.api.chat.ComponentBuilder
@@ -13,7 +13,6 @@
 package be.kod3ra.wave.checks;
 
 import be.kod3ra.wave.Wave;
-import be.kod3ra.wave.checks.CheckMethod;
 import be.kod3ra.wave.checks.impl.CheckInfo;
 import be.kod3ra.wave.user.User;
 import be.kod3ra.wave.user.utilsengine.ReliabilityEngine;
@@ -28,9 +27,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public abstract class Check
-implements CheckMethod {
-    private String checkName;
+        implements CheckMethod {
     public int violations = 0;
+    private String checkName;
     private String alertFormat;
 
     public Check() {
@@ -61,7 +60,7 @@ implements CheckMethod {
         BaseComponent[] baseComponents = new ComponentBuilder("\u00a77Informations:\n\n" + pingInfo + "\n" + tpsInfo + "\n\u00a77Debug: \u00a7f" + debugInfo + "\n" + reliabilityInfo).create();
         HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, baseComponents);
         textComponent.setHoverEvent(hoverEvent);
-        Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("wave.notify")).forEach(p -> p.spigot().sendMessage((BaseComponent)textComponent));
+        Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("wave.notify")).forEach(p -> p.spigot().sendMessage(textComponent));
         Bukkit.getServer().getConsoleSender().sendMessage(message);
     }
 }
