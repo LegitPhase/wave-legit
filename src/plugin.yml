@@ -1,0 +1,46 @@
+name: WaveLegit
+main: be.kod3ra.wave.Wave
+version: 0.6.9
+description : better version of the worst anticheat ive ever seen after negativity
+api: 1.8.8
+authors:
+  - Kod3ra
+  - bedike16
+  - LegitPhase ( on top )
+
+commands:
+
+  wave:
+    description: 'Wave command'
+
+  wavehelp:
+    description: 'List you all the commands'
+    permission: wave.help
+
+  wavegui:
+    description: 'Open the Main GUI'
+    permission: wave.gui
+
+  waveclient:
+    description: 'Give you the client of a player'
+    permission: wave.client
+
+  wavenotify:
+    description: 'Send a broadcast to <staff/everyone>'
+    permission: wave.notify
+
+  waveserver:
+    description: 'Show the server stats'
+    permission: wave.server
+
+  wavekick:
+    description: "Kick a player with wave plugin/animation"
+    permission: wave.kick
+
+  waveban:
+    description: "Ban a player with wave plugin/animation"
+    permission: wave.ban
+
+  wavetempban:
+    description: "Tempban a player with wave plugin/animation"
+    permission: wave.tempban

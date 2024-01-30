@@ -1,0 +1,261 @@
+#
+#
+#      ____    __    ____  ___   ____    ____  _______
+#      \   \  /  \  /   / /   \  \   \  /   / |   ____|
+#       \   \/    \/   / /  ^  \  \   \/   /  |  |__
+#        \            / /  /_\  \  \      /   |   __|
+#         \    /\    / /  _____  \  \    /    |  |____
+#          \__/  \__/ /__/     \__\  \__/     |_______|
+#
+#         Authors: Main Dev: Kod3ra / Helper: bedike16
+#
+
+  # Configuration for plugin messages
+wave-command: "§b§lWave §f» §eBETA 0.1.0 is running on the server!"
+
+# Help command messages
+wave-help:
+  header: "§b§lWave §7- §eCommands"
+  commands:
+    command1: "§b/wave §f» §eShow you if Wave is running on the server."
+    command2: "§b/wave help §f» §eList all the commands."
+    command3: "§b/wave gui §f» §eOpen the GUI."
+    command4: "§b/wave client <player> §f» §eShow the client of a player."
+    command5: "§b/wave notify <staff/everyone> <text> §f» §eBroadcast the server."
+    command6: "§b/wave server §f» §eShow server information's."
+    command7: "§b/wave kick <player> §f» §eKick a player with Wave's animation."
+    command8: "§b/wave tempban <player> <hours> §f» §eTempban a player with Wave's animation."
+    command9: "§b/wave ban <player> §f» §eBan a player with Wave's animation."
+
+# Animation messages
+wave-animation:
+  title-message: "§b§l§kMMM§r §eWave is kicking you out! §b§l§kMMM"
+  message-to-player: "§b§l§kMMM§r §eWhy do you use cheats? §b§l§kMMM"
+
+# Client command messages
+wave-client:
+  usage: "§b§lWave §f» §eUsage: /wave client <player>"
+  player-not-online: "§b§lWave §f» §eThe specified player is not online."
+  client-brand-message: "§b§lWave §f» §e%player% has joined the server using §b%client% §e/// §b%brand%"
+
+# Notify command messages
+wave-notify:
+  prefix: "§r"
+  usage: "§b§lWave §f» §eUsage: /wave notify <staff/everyone> <text>"
+  invalid-target: "§b§lWave §f» §eInvalid target, use staff or everyone."
+
+# Server command messages
+wave-server:
+  header: "§b§lWave Server Information:"
+  tps: "§7TPS (Ticks Per Second): §e%tps0%, %tps1%, %tps2%"
+  serverVersion: "§7Server Version: §e%serverVersion%"
+  playerCount: "§7Number of Connected Players: §e%playerCount%"
+  averagePing: "§7Average Player Ping: §e%averagePing%"
+  lagStatus: "§7Lag Status: %lagStatus%"
+  processors: "§7Number of Available Processors: §e%processors%"
+  maxMemory: "§7Maximum Server Memory: §e%maxMemory% MB"
+  usedMemory: "§7Used Server Memory: §e%usedMemory% MB"
+  jreDirectory: "§7JRE Directory: §e%jreDirectory%"
+  jreVersion: "§7JRE Version: §e%jreVersion%"
+  osArchitecture: "§7OS Architecture: §e%osArchitecture%"
+  osName: "§7OS Name: §e%osName%"
+  osVersion: "§7OS Version: §e%osVersion%"
+
+# Kick command messages
+wave-kick:
+  usage: "§b§lWave §f» §eUsage: /wave kick <player>"
+  player-not-online: "§b§lWave §f» §eThe specified player is not online."
+  kick-message: "§b§lWave §f» §eUnfair Advantage!"
+  confirmation: "§b§lWave §f» §eThe player %player% has been kicked successfully."
+
+# Ban command messages
+wave-ban:
+  usage: "§b§lWave §f» §eUsage: /wave ban <player>"
+  player-not-online: "§b§lWave §f» §eThe specified player is not online."
+  kick-message: "§b§lWave §f» §eUnfair Advantage!"
+  confirmation: "§b§lWave §f» §eThe player %player% has been banned successfully."
+
+# Tempban command messages
+wave-tempban:
+  usage: "§b§lWave §f» §eUsage: /wave tempban <player> <hours>"
+  player-not-online: "§b§lWave §f» §eThe specified player is not online."
+  invalid-hours: "§b§lWave §f» §eUse the time in hours."
+  kick-message: "§b§lWave §f» §eUnfair Advantage!"
+  confirmation: "§b§lWave §f» §eThe player %player% has been tempbanned successfully."
+
+# Alert messages
+alerts:
+  format: "§b§lWave §b// §e%player% §7failed §e%check% (%type%) §8[§7VL: %violations%§8] §8[§7RL: %reliability%%§8]"
+
+# General configuration
+setback: false # We do not recommend enabling setback, as it is in BETA version and may produce more false flags.
+
+# Time to wait before resetting violations (in milliseconds)
+violations-reset: 120000 # 120000 is equal to 120s
+
+# Checks configuration
+Checks:
+
+  # Combat Checks
+  AutoClickerA:
+    # If enabled, this check detects if a player is auto-clicking.
+    ENABLED: true
+    # The maximum number of clicks per second a player can have before being flagged.
+    MAX-CPS: 20
+    # The maximum number of violations before the action is triggered.
+    MAX-VIOLATIONS: 5
+    # The action to perform when the maximum number of violations is reached.
+    ACTION: "wavenotify staff # [ACTION] Wave » %player% is using Autoclicker (A)"
+
+  AutoClickerB:
+    # If enabled, this check detects if a player is auto-clicking on the first click time.
+    ENABLED: true
+    # The maximum number of clicks a player can have on the first click.
+    MAX-CPS-IN-FIRST-CLICKING: 4
+    # The time during which the maximum number of clicks can be reached on the first click.
+    TIME-FOR-MAX-CPS-IN-FIRST-CLICKING: 175 # = 0.175 seconds
+    MAX-VIOLATIONS: 5
+    ACTION: "wavenotify staff # [ACTION] Wave » %player% is using Autoclicker (B)"
+
+  CriticalsA:
+    # If enabled, this check detects if a player is taking advantage of critical hits.
+    ENABLED: true
+    # The time difference between flying packets and interact entity packets.
+    TIME-DIFFERENCE: 1
+    MAX-VIOLATIONS: 5
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  KillAuraA:
+    # If enabled, this check detects if a player is using Kill Aura.
+    ENABLED: true
+    # The ratio threshold for a player to be considered using Kill Aura.
+    RATIO-THRESHOLD: 1
+    MAX-VIOLATIONS: 7
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  ReachA:
+    # If enabled, this check detects if a player is reaching farther than is normally possible.
+    ENABLED: true
+    # The maximum distance a player can reach, lower than 4 it can false flag.
+    MAX-REACH-DISTANCE: 4
+    MAX-VIOLATIONS: 5
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  # Movement Checks
+  FlightA:
+    # If enabled, this check detects if a player is flying.
+    ENABLED: true
+    # The time in seconds to disable this check after a player joins.
+    ON-JOIN-DISABLED-TIME: 5
+    # The maximum number of violations before the action is triggered.
+    MAX-VIOLATIONS: 45
+    # The action to perform when the maximum number of violations is reached.
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  FlightB:
+    # If enabled, this check detects if a player is flying vertically at a speed greater than the maximum.
+    ENABLED: true
+    # The maximum vertical speed a player can have before being flagged.
+    MAX-VERTICAL-SPEED: 3.9
+    ON-JOIN-DISABLED-TIME: 5
+    MAX-VIOLATIONS: 10
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  FlightC:
+    # If enabled, this check detects if a player is flying downwards at a speed greater than the maximum.
+    ENABLED: true
+    # The maximum speed a player can have when flying downwards.
+    MAXIMUM-INVERTED-VERTICAL-SPEED: -5
+    ON-JOIN-DISABLED-TIME: 5
+    MAX-VIOLATIONS: 20
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  FlightD:
+    # If enabled, this check detects if a player is flying for longer than the allowed ground time.
+    ENABLED: true
+    # The maximum time in milliseconds a player can be off the ground.
+    GROUND-TIME: 2750
+    MAX-VIOLATIONS: 65
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  JesusA:
+    # If enabled, this check detects if a player is walking on water at a speed greater than the maximum.
+    ENABLED: true
+    # The maximum speed a player can have when walking on water.
+    MAX-SPEED: 0.15
+    MAX-VIOLATIONS: 20
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  NoFallA:
+    # If enabled, this check detects if a player is not taking fall damage.
+    ENABLED: true
+    MAX-VIOLATIONS: 20
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  SpeedA:
+    # If enabled, this check detects if a player is moving faster than the maximum speed.
+    ENABLED: true
+    # The maximum speed a player can have before being flagged.
+    MAX-SPEED: 0.62
+    MAX-VIOLATIONS: 20
+    ON-JOIN-DISABLED-TIME: 7
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  SpeedA2:
+    # If enabled, this check detects if a player is moving faster than the maximum speed.
+    ENABLED: true
+    # The maximum speed a player can have before being flagged.
+    MAX-SPEED: 1.3882
+    MAX-VIOLATIONS: 25
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  StepA:
+    # If enabled, this check detects if a player is stepping up blocks faster than the maximum speed.
+    ENABLED: true
+    # The maximum vertical speed a player can have when stepping up a block.
+    MAX-Y-SPEED: 0.999
+    MAX-VIOLATIONS: 10
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  # Player Checks
+  BadPacketsA:
+    # If enabled, this check detects if a player is sending more packets per second than allowed.
+    ENABLED: true
+    # The maximum number of packets a player can send per second.
+    MAX-PACKETS-PER-SECOND: 100
+    # The maximum number of violations before the action is triggered.
+    MAX-VIOLATIONS: 40
+    # The action to perform when the maximum number of violations is reached.
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  BadPacketsB:
+    # If enabled, this check detects if a player's pitch is greater than the maximum allowed.
+    ENABLED: true
+    # The maximum pitch a player can have.
+    MAX-PITCH: 90
+    MAX-VIOLATIONS: 15
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  BadPacketsC:
+    # If enabled, this check detects if a player is breaking blocs to far away (detect when players break blocks freecam).
+    ENABLED: true
+    MAX-VIOLATIONS: 20
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  FastBowA:
+    # If enabled, this check detects if a player is shooting arrows faster than allowed.
+    ENABLED: true
+    # The maximum number of packets a player can send when using a bow.
+    MAX-PACKETS: 30
+    MAX-VIOLATIONS: 60
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
+
+  TimerA:
+    # If enabled, this check detects if a player is using a timer to gain an advantage.
+    ENABLED: true
+    # The maximum number of packets a player can send when moving.
+    MAX-PACKETS: 26
+    # The time in seconds to disable this check after a player joins.
+    ON-JOIN-DISABLED-TIME: 10
+    MAX-VIOLATIONS: 80
+    ACTION: "kick %player% # [ACTION] Wave » Unfair Advantage"
